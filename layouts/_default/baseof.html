@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>{{ block "title" . }}
+        {{ .Site.Title }}
+        {{ end }}</title>
+    {{ $styles := resources.Get "scss/main.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
+    <link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}" media="screen">
+</head>
+
+<body>
+    <div class="grid-container">
+        <div class="grid-lines">
+            <div class="grid-lines-inner">
+                <div class="grid-ground"></div>
+                <div class="horizontal">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+                <div class="vertical">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </div>
+        <div class="main-container">
+        <header class="logo">
+          <div class="menu-top">
+              {{ $CurrentPage := . }}
+              <a href="/" class="{{ if .IsHome }}active{{ end }}">Home</a>
+              {{ range first 10 .Site.RegularPages }}
+                  <a href="{{ .Permalink }}" class="{{ if eq $CurrentPage.Permalink .Permalink }}active{{ end }}">{{ .Title }}</a>
+              {{ end }}
+            </div>
+          {{ with .Params.subtitle }}
+          <span class="subtitle">{{.}}</span>
+          {{ end }}
+        </header>
+        <!-- Code that all your templates share, like a header -->
+        {{ block "main" . }}
+        <!-- The part of the page that begins to differ between templates -->
+        {{ end }}</div>
+        {{ block "footer" . }}
+        <!-- More shared code, perhaps a footer but that can be overridden if need be in  -->
+        {{ end }}
+
+    </div>
+</body>
+
+</html>
