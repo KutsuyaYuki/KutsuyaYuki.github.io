@@ -1,9 +1,14 @@
 // Menu desktop
+#menu-toggle{
+    display:none;
+}
+
+.main-content-container {
+    transition-duration: 0.25s;
+}
 .menu-top {
-    #menu-toggle{
-        display:none;
-    }
     ul {
+        padding: 0;
         list-style: none;
     }
 
@@ -54,71 +59,75 @@
 
 // Menu mobile
 @media only screen and (max-width: 768px) {
-    .menu-top {
-        #menu-toggle {
-            opacity: 0;
+    #menu-toggle {
+        opacity: 0;
+        z-index: 10;
 
-            &:checked {
-                +.menu-btn>span {
-                    transform: rotate(45deg);
+        &:checked {
+            +.menu-btn>span {
+                transform: rotate(45deg);
 
-                    &::before {
-                        top: 0;
-                        transform: rotate(0deg);
-                    }
-
-                    &::after {
-                        top: 0;
-                        transform: rotate(90deg);
-                    }
+                &::before {
+                    top: 0;
+                    transform: rotate(0deg);
                 }
 
-                ~ul {
-                    left: 0 !important;
+                &::after {
+                    top: 0;
+                    transform: rotate(90deg);
                 }
             }
+
+            ~ .logo {
+                left: 0;
+            }
+
+            ~ .main-content-container {
+                margin-left: 300px;
+                width: 100%;
+            }
         }
+    }
 
-        .menu-btn {
-            position: fixed;
-            top: 40px;
-            left: 30px;
-            width: 26px;
-            height: 26px;
-            cursor: pointer;
-            z-index: 1;
+    .menu-btn {
+        position: fixed;
+        top: 40px;
+        left: 30px;
+        width: 26px;
+        height: 26px;
+        cursor: pointer;
+        z-index: 11;
 
-            >span {
+        >span {
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: #616161;
+            transition-duration: 0.25s;
+
+            &::before,
+            &::after {
                 display: block;
                 position: absolute;
                 width: 100%;
                 height: 2px;
                 background-color: #616161;
                 transition-duration: 0.25s;
+            }
 
-                &::before,
-                &::after {
-                    display: block;
-                    position: absolute;
-                    width: 100%;
-                    height: 2px;
-                    background-color: #616161;
-                    transition-duration: 0.25s;
-                }
+            &::before {
+                content: "";
+                top: -8px;
+            }
 
-                &::before {
-                    content: "";
-                    top: -8px;
-                }
-
-                &::after {
-                    content: "";
-                    top: 8px;
-                }
+            &::after {
+                content: "";
+                top: 8px;
             }
         }
-
-        ul {
+    }
+    header.logo {
             position: fixed;
             top: 0;
             left: -100%;
@@ -129,7 +138,6 @@
             background-color: rgba(0, 0, 0, 0.7);
             box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
             transition-duration: 0.25s;
-        }
 
         li {
             display: list-item;

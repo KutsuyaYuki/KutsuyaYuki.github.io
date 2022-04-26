@@ -44,12 +44,12 @@
             </div>
         </div>
         <div class="main-container">
+            <input id="menu-toggle" type="checkbox" />
+            <label class="menu-btn" for="menu-toggle">
+                <span></span>
+            </label>
             <header class="logo">
                 <div class="menu-top">
-                    <input id="menu-toggle" type="checkbox" />
-                    <label class="menu-btn" for="menu-toggle">
-                    <span></span>
-                    </label>
                     {{ $CurrentPage := . }}
                     <ul>
                         <li>
@@ -57,7 +57,8 @@
                         </li>
                         {{ range first 10 .Site.RegularPages }}
                         <li>
-                            <a href="{{ .Permalink }}" class="{{ if eq $CurrentPage.Permalink .Permalink }}active{{ end }}">{{ .Title }}</a>
+                            <a href="{{ .Permalink }}"
+                                class="{{ if eq $CurrentPage.Permalink .Permalink }}active{{ end }}">{{ .Title }}</a>
                         </li>
                         {{ end }}
                     </ul>
@@ -67,10 +68,17 @@
                 <span class="subtitle">{{.}}</span>
                 {{ end }}
             </header>
-            <!-- Code that all your templates share, like a header -->
-            {{ block "main" . }}
-            <!-- The part of the page that begins to differ between templates -->
-            {{ end }}
+            <main aria-role="main" class="main-content-container">
+                <!-- Code that all your templates share, like a header -->
+                {{ block "main" . }}
+                <!-- The part of the page that begins to differ between templates -->
+                {{ end }}
+            </main>
+            <div class="footer">
+                <span>Kutsuya</span>
+                <span></span>
+                <span>v.0.0.1</span>
+            </div>
         </div>
         {{ block "footer" . }}
         <!-- More shared code, perhaps a footer but that can be overridden if need be in  -->
