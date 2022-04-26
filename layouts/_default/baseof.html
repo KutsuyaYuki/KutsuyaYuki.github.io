@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <title>{{ block "title" . }}
         {{ .Site.Title }}
@@ -43,22 +44,34 @@
             </div>
         </div>
         <div class="main-container">
-        <header class="logo">
-          <div class="menu-top">
-              {{ $CurrentPage := . }}
-              <a href="/" class="{{ if .IsHome }}active{{ end }}">Home</a>
-              {{ range first 10 .Site.RegularPages }}
-                  <a href="{{ .Permalink }}" class="{{ if eq $CurrentPage.Permalink .Permalink }}active{{ end }}">{{ .Title }}</a>
-              {{ end }}
-            </div>
-          {{ with .Params.subtitle }}
-          <span class="subtitle">{{.}}</span>
-          {{ end }}
-        </header>
-        <!-- Code that all your templates share, like a header -->
-        {{ block "main" . }}
-        <!-- The part of the page that begins to differ between templates -->
-        {{ end }}</div>
+            <header class="logo">
+                <div class="menu-top">
+                    <input id="menu-toggle" type="checkbox" />
+                    <label class="menu-btn" for="menu-toggle">
+                    <span></span>
+                    </label>
+                    {{ $CurrentPage := . }}
+                    <ul>
+                        <li>
+                            <a href="/" class="{{ if .IsHome }}active{{ end }}">Home</a>
+                        </li>
+                        {{ range first 10 .Site.RegularPages }}
+                        <li>
+                            <a href="{{ .Permalink }}" class="{{ if eq $CurrentPage.Permalink .Permalink }}active{{ end }}">{{ .Title }}</a>
+                        </li>
+                        {{ end }}
+                    </ul>
+
+                </div>
+                {{ with .Params.subtitle }}
+                <span class="subtitle">{{.}}</span>
+                {{ end }}
+            </header>
+            <!-- Code that all your templates share, like a header -->
+            {{ block "main" . }}
+            <!-- The part of the page that begins to differ between templates -->
+            {{ end }}
+        </div>
         {{ block "footer" . }}
         <!-- More shared code, perhaps a footer but that can be overridden if need be in  -->
         {{ end }}
