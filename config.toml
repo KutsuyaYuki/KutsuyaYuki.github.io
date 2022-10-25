@@ -24,3 +24,7 @@ Title = 'Yukis website'
     url = "/about/"
     weight = 4
     
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
