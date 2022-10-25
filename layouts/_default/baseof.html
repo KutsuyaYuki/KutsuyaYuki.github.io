@@ -50,7 +50,7 @@
             </label>
             <header class="logo">
                 <div class="menu-top">
-                    {{ $CurrentPage := . }}
+                    <!-- {{ $CurrentPage := . }}
                     <ul>
                         <li>
                             <a href="/" class="{{ if .IsHome }}active{{ end }}">Home</a>
@@ -61,7 +61,9 @@
                                 class="{{ if eq $CurrentPage.Permalink .Permalink }}active{{ end }}">{{ .Title }}</a>
                         </li>
                         {{ end }}
-                    </ul>
+                    </ul> -->
+
+                    {{ partial "menu.html" . }}
 
                 </div>
                 {{ with .Params.subtitle }}
