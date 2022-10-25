@@ -116,3 +116,29 @@ body {
     height: 20px;
     background-color: rgba(0, 0, 0, .5);
 }
+
+.breadcrumbs{
+    padding-top: 5px;
+    text-align: left;
+    li {
+        display: inline-block;
+        color: #db3eb1;
+        &:before {
+            content: '/ '
+        }
+        a,a:visited {
+            color: #db3eb1;
+            text-decoration: none;
+            &:hover {
+                text-decoration: none;
+                color: #000;
+                background-color: #db3eb1;
+                filter: drop-shadow(0 0 20px #db3eb1)contrast(2)brightness(2);
+            }
+        }
+    }
+}
+.breadcrumbs-line {
+    border-top: 1px solid #db3eb156;
+    margin: 6px 0px 0px 0px;
+}
