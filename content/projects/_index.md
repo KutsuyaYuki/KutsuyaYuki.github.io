@@ -6,4 +6,5 @@ type: "page"
 layout: "single"
 ---
 
+ - [Artifical AI](ai/)
  - [Database of handheld devices](handheld_devices/)
